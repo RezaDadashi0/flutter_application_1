@@ -21,13 +21,31 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// class Items{
+//   final String title;
+//   final Icon icon;
+// }
+
+// Items({required this.title})
 class MyCustomForm extends StatelessWidget {
   MyCustomForm({super.key});
 
-  final List<String> items = [
-    'فعال سازی و دریافت رمز عبور',
-    'رمز عبور را فراموش کردم',
-    'افتتاح حساب می کنم'
+  final List<dynamic> items = [
+    {
+      'title': 'فعال سازی و دریافت رمز عبور',
+      'leading_icon': Icons.mobile_friendly_rounded,
+      'trailing_icon': Icons.contact_support_rounded,
+    },
+    {
+      'title': 'رمز عبور را فراموش کردم',
+      'leading_icon': Icons.key_rounded,
+      'trailing_icon': Icons.contact_support_rounded,
+    },
+    {
+      'title': 'افتتاح حساب می کنم',
+      'leading_icon': Icons.account_balance_rounded,
+      'trailing_icon': Icons.contact_support_rounded,
+    },
   ];
 
   @override
@@ -46,12 +64,12 @@ class MyCustomForm extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
-                padding: const EdgeInsets.only(top: 30.0, bottom: 20.0),
+                padding: const EdgeInsets.only(top: 35.0, bottom: 25.0),
                 width: 100,
                 child: Image.asset('images/ttbank.png'),
               ),
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 child: TextField(
                   textAlign: TextAlign.right,
                   decoration: InputDecoration(
@@ -65,7 +83,7 @@ class MyCustomForm extends StatelessWidget {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 child: TextField(
                   textAlign: TextAlign.right,
                   decoration: InputDecoration(
@@ -125,33 +143,55 @@ class MyCustomForm extends StatelessWidget {
                   onTap: () {
                     showModalBottomSheet(
                       context: context,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(25),
+                          topRight: Radius.circular(25),
+                        ),
+                      ),
                       builder: (BuildContext context) {
                         return Container(
-                          padding: const EdgeInsets.all(12.0),
-                          height: 200.0,
+                          padding: const EdgeInsets.symmetric(vertical: 12.0),
+                          // color: Colors.teal[900],
                           decoration: const BoxDecoration(
-                            borderRadius:
-                                BorderRadius.vertical(top: Radius.circular(30)),
+                            color: Color.fromARGB(255, 1, 34, 34),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(25),
+                              topRight: Radius.circular(25),
+                            ),
                           ),
+                          height: 190.0,
+                          // color: const Color(0XFF0b4061),
                           child: ListView.builder(
                               itemCount: items.length,
                               itemBuilder: (context, index) {
                                 return Column(
-                                  // crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    ListTile(
-                                      title: Center(
-                                        child: Text(
-                                          items[index],
+                                    Directionality(
+                                      textDirection: TextDirection.rtl,
+                                      child: ListTile(
+                                        textColor: Colors.white70,
+                                        title: Text(
+                                          items[index]['title'],
+                                        ),
+                                        leading: Icon(
+                                          items[index]['leading_icon'],
+                                          color: Colors.white,
+                                        ),
+                                        trailing: Icon(
+                                          items[index]['trailing_icon'],
+                                          size: 26.0,
+                                          color: const Color.fromARGB(
+                                              255, 173, 237, 243),
                                         ),
                                       ),
                                     ),
                                     const Divider(
-                                      height: 10,
-                                      thickness: 1,
-                                      // indent: ,
-                                      // endIndent: 0,
-                                      color: Color(0xFF54c5d0),
+                                      height: 4,
+                                      thickness: 0.4,
+                                      indent: 10,
+                                      endIndent: 10,
+                                      color: Colors.white,
                                     ),
                                   ],
                                 );
@@ -216,57 +256,3 @@ class MyCustomForm extends StatelessWidget {
     );
   }
 }
-
-// import 'package:flutter/material.dart';
-
-// void main() {
-//   runApp(const MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Page Transition',
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue,
-//       ),
-//       home: const HomePage(),
-//     );
-//   }
-// }
-
-// class HomePage extends StatelessWidget {
-//   const HomePage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('First Page'),
-//       ),
-//       body: Center(
-//         child: ElevatedButton(
-//           child: const Text('Go to Modal'),
-//           onPressed: () {
-//             showModalBottomSheet(
-//               context: context,
-//               builder: (BuildContext context) {
-//                 return SizedBox(
-//                   height: 300.0,
-//                   child: ElevatedButton(
-//                     child: const Text('close'),
-//                     onPressed: () {
-//                       Navigator.pop(context);
-//                     },
-//                   ),
-//                 );
-//               },
-//             );
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
